@@ -15,9 +15,16 @@ function randomStart(width, height) {
     return [widthPosition, heightPosition];
 }
 
+function draw({ key }) {
+    // Used object destructuring instead of receiving passed object and isolating property we want.
+    console.log(key);
+}
+
 function handleKey(e) {
-    // e.preventDefault();
-    console.log(`Handling Key`);
+    if (e.key.includes(`Arrow`) === true) {
+        e.preventDefault();
+        draw({ key: e.key});
+    }
 }
 
 ctx.lineJoin = `round`;
