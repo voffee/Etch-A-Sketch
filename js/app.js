@@ -3,9 +3,9 @@
 
 const canvas = document.querySelector(`#etch-a-sketch`);
 const ctx = canvas.getContext(`2d`);
-const shakeButton = document.querySelector(`.shake`);
+const clearButton = document.querySelector(`.clear-btn`);
 const {width, height} = canvas;
-const MOVE_AMOUNT = 5;
+const MOVE_AMOUNT = 8;
 let [startX, startY] =  randomStart(width, height);
 
 // Function Declarations
@@ -20,11 +20,13 @@ function draw({ key }) {
     // Used object destructuring instead of receiving passed object and isolating property we want.
     console.log(key);
 
+    hue = hue + 7;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     // startX = startX - MOVE_AMOUNT;
     // startY = startY - MOVE_AMOUNT;
-    
+
     switch (key) {
         case `ArrowUp`:
             startY = startY - MOVE_AMOUNT;
@@ -57,17 +59,23 @@ function handleKey(e) {
     }
 }
 
+function clearCanvas() {
+    canvas.classList.toggle(`shake`);
+}
+
 ctx.lineJoin = `round`;
 ctx.lineCap = `round`;
-ctx.lineWidth = 5;
+ctx.lineWidth = 10;
 
 let hue = 0;
-ctx.strokeStyle = `hsl(100, 100%, 50%)`;
+
+ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 ctx.beginPath();
 ctx.moveTo(startX, startY);
 ctx.lineTo(startX, startY);
 ctx.stroke();
 
 window.addEventListener('keydown', handleKey);
+clearButton.addEventListener('click', clearCanvas);
 
 console.log(width, height);

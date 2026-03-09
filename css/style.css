@@ -24,11 +24,11 @@ canvas {
     border: 10px solid #e80000;
 }
 
-.canvasWrapper .shake {
-    animation: shake 0.5s linear 1;
+.shake {
+    animation: vibrate 0.5s linear 1;
 }
 
-@keyframes shake {
+@keyframes vibrate {
     10%, 90% {
         transform: translate3d(-1px, 0, 0);
     }
