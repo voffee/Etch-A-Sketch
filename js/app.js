@@ -5,7 +5,7 @@ const canvas = document.querySelector(`#etch-a-sketch`);
 const ctx = canvas.getContext(`2d`);
 const clearButton = document.querySelector(`.clear-btn`);
 const {width, height} = canvas;
-const MOVE_AMOUNT = 8;
+const MOVE_AMOUNT = 10;
 let [startX, startY] =  randomStart(width, height);
 
 // Function Declarations
@@ -60,7 +60,11 @@ function handleKey(e) {
 }
 
 function clearCanvas() {
-    canvas.classList.toggle(`shake`);
+    canvas.classList.add(`shake`);
+    canvas.addEventListener(`animationend`, function() {
+        canvas.classList.remove(`shake`);
+    }, { once: true });
+    ctx.clearRect(0, 0, width, height);
 }
 
 ctx.lineJoin = `round`;
